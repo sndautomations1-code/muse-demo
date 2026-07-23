@@ -274,10 +274,15 @@ body.over-hero .masthead-meta {
   margin-top: clamp(1.5rem, 4vh, 3rem);
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(3.2rem, 13vw, 12rem);
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-size: clamp(3.4rem, 15vw, 15rem);
+  line-height: 0.88;
+  letter-spacing: -0.025em;
   color: var(--paper);
+}
+
+/* Cancel the inner descender padding so the lines read as one object */
+.hero-line + .hero-line {
+  margin-top: -0.06em;
 }
 
 .hero-title em {
@@ -311,7 +316,7 @@ body.over-hero .masthead-meta {
 .hero-lede {
   position: relative;
   z-index: 1;
-  margin-top: clamp(1.75rem, 4vh, 3rem);
+  margin-top: 3rem;
   max-width: 36ch;
   color: rgba(242, 241, 236, 0.82);
   font-size: clamp(1rem, 0.95rem + 0.35vw, 1.2rem);
