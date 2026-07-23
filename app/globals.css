@@ -95,6 +95,11 @@ em {
   text-align: right;
 }
 
+.meta-item,
+.meta-issue {
+  white-space: nowrap;
+}
+
 /* ——— 4.2 Hero ——— */
 
 .hero {

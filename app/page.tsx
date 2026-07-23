@@ -67,8 +67,9 @@ export default function Home() {
       <header className="masthead">
         <span className="masthead-mark">MUSE</span>
         <span className="masthead-meta mono">
-          The Autumn Edit
-          <span className="meta-mid"> · Aesthetic Clinic</span> · Issue 01
+          <span className="meta-item">The Autumn Edit</span>
+          <span className="meta-mid"> · Aesthetic Clinic</span>
+          <span className="meta-issue"> · Issue 01</span>
         </span>
       </header>
 
