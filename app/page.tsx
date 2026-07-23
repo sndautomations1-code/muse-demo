@@ -126,7 +126,14 @@ export default function Home() {
           </div>
           <h1 className="hero-title">
             <span className="hero-line">
-              <span className="hero-line-inner">The skin</span>
+              <span className="hero-line-inner">
+                <span className="glow-word" data-word="The">
+                  The
+                </span>{" "}
+                <span className="glow-word" data-word="skin">
+                  skin
+                </span>
+              </span>
             </span>
             <span className="hero-line">
               <span className="hero-line-inner">

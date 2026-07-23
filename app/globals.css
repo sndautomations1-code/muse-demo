@@ -266,6 +266,7 @@ body.over-hero .nav-cta:focus-visible {
   right: -4vw;
   width: 78%;
   z-index: 2;
+  pointer-events: none; /* decorative — hover must reach the title beneath */
   animation: cover-fade 0.8s ease-out both;
   -webkit-mask-image: linear-gradient(
     to right,
@@ -590,6 +591,31 @@ body.over-hero .nav-cta:focus-visible {
 
 .hero-line:nth-child(2) .hero-line-inner {
   animation-delay: 80ms;
+}
+
+/* Hover halo — pre-rendered blurred copy behind the word; only opacity animates.
+   inline-block so the ::after copy's line box aligns with the word's own glyphs
+   (on a plain inline span the negative leading shifts the copy upward). */
+.glow-word {
+  position: relative;
+  display: inline-block;
+}
+
+.glow-word::after {
+  content: attr(data-word);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--klein-tint);
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.glow-word:hover::after {
+  opacity: 0.85;
 }
 
 @keyframes hero-rise {
