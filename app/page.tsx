@@ -62,6 +62,7 @@ const treatments = [
 ];
 
 import PlateImage from "./plate-image";
+import CoverObserver from "./cover-observer";
 
 export default function Home() {
   return (
@@ -77,10 +78,20 @@ export default function Home() {
 
       <main>
         <section className="hero">
-          <div className="hero-eyebrow mono">
+          <CoverObserver />
+          <div className="cover-media">
+            <div className="cover-media-fade">
+              <PlateImage
+                src="/plates/hero.jpg"
+                alt="Black and white profile portrait, face lifted toward the light"
+              />
+            </div>
+          </div>
+          <div className="cover-frame" aria-hidden="true"></div>
+          <div className="cover-eyebrow mono">
             <span>Advanced skin &amp; aesthetic treatments</span>
-            <span className="hero-eyebrow-rule" aria-hidden="true"></span>
-            <span className="hero-eyebrow-no">No. 01–06</span>
+            <span className="cover-eyebrow-rule" aria-hidden="true"></span>
+            <span className="cover-eyebrow-no">No. 01–06</span>
           </div>
           <h1 className="hero-title">
             <span className="hero-line">
@@ -97,16 +108,16 @@ export default function Home() {
               "Advanced facials, injectables and laser therapy in a private Marylebone clinic. Every plan begins with a consultation — and is edited to your skin."
             }
           </p>
-          <figure className="hero-plate">
-            <PlateImage
-              src="/plates/hero.jpg"
-              alt="Close study of skin in black and white"
-            />
-            <figcaption className="plate-caption mono">
-              PLATE I — SKIN STUDY
-            </figcaption>
-          </figure>
-          <p className="hero-index mono">Six treatments · By consultation only</p>
+          <div className="cover-band mono">
+            <span className="cover-band-left">
+              Issue 01<span className="cover-band-ext"> — The Autumn Edit</span>
+            </span>
+            <span className="cover-cue">
+              <span className="cover-cue-label">Scroll for the Menu</span>
+              <span className="cover-cue-line" aria-hidden="true"></span>
+            </span>
+            <span className="cover-band-right">Marylebone, London</span>
+          </div>
         </section>
 
         <p className="trust mono">
