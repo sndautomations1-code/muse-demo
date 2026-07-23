@@ -140,7 +140,21 @@ em {
 
 .hero-line-inner {
   display: block;
+  animation: hero-rise 0.9s var(--ease) both;
   padding-bottom: 0.06em; /* keep descenders clear of the mask */
+}
+
+.hero-line:nth-child(2) .hero-line-inner {
+  animation-delay: 80ms;
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .hero-lede {
@@ -203,10 +217,12 @@ em {
   align-items: baseline;
   padding: 1.4rem 0;
   border-bottom: 1px solid var(--hair);
+  transition: padding-left 0.5s var(--ease);
 }
 
 .menu-no {
   grid-column: 1;
+  transition: color 0.5s var(--ease);
 }
 
 .menu-name-wrap {
@@ -253,6 +269,33 @@ em {
 .menu-spec {
   margin-top: 0.7rem;
   color: var(--klein);
+}
+
+/* Hover-capable devices: cards collapse, reveal on row hover */
+@media (hover: hover) and (pointer: fine) {
+  .menu-card {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      max-height 0.5s var(--ease),
+      opacity 0.5s var(--ease),
+      transform 0.5s var(--ease);
+  }
+
+  .menu-row:hover {
+    padding-left: 1.25rem;
+  }
+
+  .menu-row:hover .menu-no {
+    color: var(--klein);
+  }
+
+  .menu-row:hover .menu-card {
+    max-height: 18rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ——— 4.5 The Visit ——— */
@@ -367,6 +410,19 @@ em {
   background: var(--klein);
   color: var(--paper);
   text-decoration: none;
+  transition: transform 0.3s var(--ease);
+}
+
+.cta-arrow {
+  transition: transform 0.3s var(--ease);
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+}
+
+.cta:hover .cta-arrow {
+  transform: translateX(4px);
 }
 
 .cta:focus-visible {
@@ -456,5 +512,26 @@ em {
 
   .menu-card {
     grid-column: 1 / -1;
+  }
+}
+
+/* ——— Reduced motion: static page, everything visible ——— */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .menu-card {
+    max-height: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
