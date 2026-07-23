@@ -382,21 +382,42 @@ body.over-hero .nav-cta:focus-visible {
   --cover-mark: rgba(242, 241, 236, 0.25);
 }
 
-/* Proof annotations — leader lines into the portrait, desktop only */
-.anno {
+/* Engineered callouts — anchored to the photo's drawn box, desktop only */
+.callouts {
   display: none;
 }
 
 @media (min-width: 1100px) {
-  .anno {
+  /* Geometry twin of .cover-media (kept outside it: its masks would
+     fade any child rendered in the dark zone) */
+  .callouts {
     display: block;
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    right: -4vw;
+    width: 78%;
     z-index: 3;
     pointer-events: none;
   }
 
-  .anno-svg {
+  /* Twin of the drawn image box: height-constrained cover at
+     object-position 12% — left = 12% of (container - image) width */
+  .callouts-img {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    aspect-ratio: 1376 / 768;
+    left: 12%;
+    transform: translateX(-12%);
+  }
+
+  .callout {
+    position: absolute;
+    inset: 0;
+  }
+
+  .callout-svg {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -404,41 +425,55 @@ body.over-hero .nav-cta:focus-visible {
     overflow: visible;
   }
 
-  .anno-svg line {
-    stroke: rgba(242, 241, 236, 0.35);
+  .callout-svg polyline {
+    fill: none;
+    stroke: rgba(242, 241, 236, 0.3);
     stroke-width: 1;
-    /* dash space is screen px under non-scaling-stroke; 360 > any line length */
-    stroke-dasharray: 360;
+    /* dash space is screen px under non-scaling-stroke; 400 > any line */
+    stroke-dasharray: 400;
     stroke-dashoffset: 0;
     transition: stroke 0.25s var(--ease);
-    animation: anno-draw 0.7s var(--ease) both;
-    animation-delay: var(--anno-delay);
+    animation: callout-draw 0.7s var(--ease) both;
+    animation-delay: var(--callout-delay);
   }
 
-  .anno-dot {
+  /* 3px marker + 10px hairline ring */
+  .callout-dot {
     position: absolute;
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: rgba(242, 241, 236, 0.8);
+    background: rgba(242, 241, 236, 0.9);
     transform: translate(-50%, -50%);
     transition: background 0.25s var(--ease);
-    animation: anno-fade 0.7s var(--ease) both;
-    animation-delay: var(--anno-delay);
+    animation: callout-fade 0.7s var(--ease) both;
+    animation-delay: var(--callout-delay);
   }
 
-  .anno-tag {
+  .callout-dot::before {
+    content: "";
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+    inset: -3.5px;
+    border: 1px solid rgba(242, 241, 236, 0.45);
+    border-radius: 50%;
+    transition: border-color 0.25s var(--ease);
+  }
+
+  .callout-tag {
+    position: absolute;
+    right: 69.62%; /* label column right edge: x 418 of 1376 */
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    white-space: nowrap;
     pointer-events: auto;
     text-decoration: none;
-    animation: anno-fade 0.7s var(--ease) both;
-    animation-delay: var(--anno-delay);
+    animation: callout-fade 0.7s var(--ease) both;
+    animation-delay: var(--callout-delay);
   }
 
-  .anno-no {
+  .callout-no {
     font-family: var(--font-mono), monospace;
     font-size: 0.6rem;
     letter-spacing: 0.2em;
@@ -447,39 +482,51 @@ body.over-hero .nav-cta:focus-visible {
     transition: color 0.25s var(--ease);
   }
 
-  .anno-label {
+  .callout-sep {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6rem;
+    color: rgba(242, 241, 236, 0.4);
+    transition: color 0.25s var(--ease);
+  }
+
+  .callout-label {
     font-family: var(--font-display), serif;
     font-style: italic;
-    font-size: 1.1rem;
-    line-height: 1.2;
+    font-size: 1.05rem;
+    line-height: 1;
     color: rgba(242, 241, 236, 0.85);
     transition: color 0.25s var(--ease);
   }
 
-  .anno-tag:hover .anno-no,
-  .anno-tag:hover .anno-label {
+  .callout-tag:hover .callout-no,
+  .callout-tag:hover .callout-sep,
+  .callout-tag:hover .callout-label {
     color: var(--klein-tint);
   }
 
-  .anno:has(.anno-tag:hover) .anno-svg line {
+  .callout:has(.callout-tag:hover) .callout-svg polyline {
     stroke: var(--klein-tint);
   }
 
-  .anno:has(.anno-tag:hover) .anno-dot {
+  .callout:has(.callout-tag:hover) .callout-dot {
     background: var(--klein-tint);
+  }
+
+  .callout:has(.callout-tag:hover) .callout-dot::before {
+    border-color: var(--klein-tint);
   }
 }
 
-@keyframes anno-draw {
+@keyframes callout-draw {
   from {
-    stroke-dashoffset: 360;
+    stroke-dashoffset: 400;
   }
   to {
     stroke-dashoffset: 0;
   }
 }
 
-@keyframes anno-fade {
+@keyframes callout-fade {
   from {
     opacity: 0;
   }
