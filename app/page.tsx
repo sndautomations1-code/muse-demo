@@ -112,10 +112,6 @@ export default function Home() {
             <span className="cover-band-left">
               Issue 01<span className="cover-band-ext"> — The Autumn Edit</span>
             </span>
-            <span className="cover-cue">
-              <span className="cover-cue-label">Scroll for the Menu</span>
-              <span className="cover-cue-line" aria-hidden="true"></span>
-            </span>
             <span className="cover-band-right">Marylebone, London</span>
           </div>
         </section>
