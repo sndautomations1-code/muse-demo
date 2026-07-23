@@ -67,14 +67,44 @@ import CoverObserver from "./cover-observer";
 export default function Home() {
   return (
     <>
-      <header className="masthead">
-        <span className="masthead-mark">MUSE</span>
-        <span className="masthead-meta mono">
-          <span className="meta-item">The Autumn Edit</span>
-          <span className="meta-mid"> · Aesthetic Clinic</span>
-          <span className="meta-issue"> · Issue 01</span>
-        </span>
-      </header>
+      <nav className="masthead" aria-label="Main">
+        <div className="nav-links">
+          <a className="nav-link" href="#menu">
+            The Menu
+          </a>
+          <a className="nav-link" href="#visit">
+            The Visit
+          </a>
+          <a className="nav-link" href="#contact">
+            Contact
+          </a>
+        </div>
+        <a className="nav-brand" href="#">
+          <svg
+            className="nav-mark"
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9" />
+          </svg>
+          <span className="masthead-mark">MUSE</span>
+        </a>
+        <a
+          className="nav-cta"
+          href="https://splendessa.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="nav-cta-full">Book a consultation</span>
+          <span className="nav-cta-short">Book</span>
+        </a>
+      </nav>
 
       <main>
         <section className="hero">
@@ -120,7 +150,7 @@ export default function Home() {
           MEDICALLY SUPERVISED · CERTIFIED PRACTITIONERS · CE-MARKED DEVICES
         </p>
 
-        <section className="menu">
+        <section className="menu" id="menu">
           <div className="menu-head">
             <h2 className="section-title">The Menu</h2>
             <p className="menu-hint mono">Hover a treatment for details</p>
@@ -147,7 +177,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section className="visit">
+        <section className="visit" id="visit">
           <figure className="plate">
             <PlateImage
               src="/plates/plate-01.jpg"
@@ -202,7 +232,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="footer">
+      <footer className="footer" id="contact">
         <div className="footer-cols">
           <div className="footer-col">
             <h3 className="footer-head mono">Clinic</h3>
