@@ -61,6 +61,8 @@ const treatments = [
   },
 ];
 
+import PlateImage from "./plate-image";
+
 export default function Home() {
   return (
     <>
@@ -95,6 +97,15 @@ export default function Home() {
               "Advanced facials, injectables and laser therapy in a private Marylebone clinic. Every plan begins with a consultation — and is edited to your skin."
             }
           </p>
+          <figure className="hero-plate">
+            <PlateImage
+              src="/plates/hero.jpg"
+              alt="Close study of skin in black and white"
+            />
+            <figcaption className="plate-caption mono">
+              PLATE I — SKIN STUDY
+            </figcaption>
+          </figure>
           <p className="hero-index mono">Six treatments · By consultation only</p>
         </section>
 
@@ -131,13 +142,12 @@ export default function Home() {
 
         <section className="visit">
           <figure className="plate">
-            {/* eslint-disable-next-line @next/next/no-img-element -- plain <img> required: the Klein duotone comes from CSS filter + mix-blend-mode on the raw element */}
-            <img
+            <PlateImage
               src="/plates/plate-01.jpg"
               alt="A private treatment room at the clinic"
             />
             <figcaption className="plate-caption mono">
-              Plate I — Treatment Room
+              PLATE II — TREATMENT ROOM
             </figcaption>
           </figure>
           <div className="visit-text">

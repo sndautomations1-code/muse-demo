@@ -173,6 +173,77 @@ em {
   text-align: right;
 }
 
+/* Hero plate — mobile-first: full-width below the lede, 4:3 */
+.hero-plate {
+  position: relative;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  aspect-ratio: 4 / 3;
+  background: #ddd;
+  overflow: hidden;
+  animation: plate-fade 0.6s var(--ease) both;
+}
+
+.hero-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+}
+
+@keyframes plate-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Missing image → neutral block (covers any plate background) */
+.plate-fallback {
+  position: absolute;
+  inset: 0;
+  background: #ddd;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "eyebrow plate"
+      "title plate"
+      "lede plate"
+      "index plate";
+    column-gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .hero-eyebrow {
+    grid-area: eyebrow;
+  }
+
+  .hero-title {
+    grid-area: title;
+  }
+
+  .hero-lede {
+    grid-area: lede;
+  }
+
+  .hero-index {
+    grid-area: index;
+    align-self: end;
+  }
+
+  .hero-plate {
+    grid-area: plate;
+    margin-top: 0;
+    aspect-ratio: 3 / 4;
+    align-self: start;
+  }
+}
+
 /* ——— 4.3 Trust strip ——— */
 
 .trust {
