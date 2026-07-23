@@ -142,33 +142,45 @@ em {
 }
 
 .nav-cta {
+  position: relative;
   justify-self: end;
   font-family: var(--font-mono), monospace;
-  font-size: 0.62rem;
+  font-size: 0.66rem;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.24em;
   white-space: nowrap;
   text-decoration: none;
-  background: var(--klein);
-  color: var(--paper);
-  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(22, 22, 26, 0.35);
   transition:
-    background 0.25s var(--ease),
-    transform 0.25s var(--ease);
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+/* ≥44px hit area while the pill itself stays slim */
+.nav-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
 }
 
 .nav-cta:hover {
-  background: #0038c9;
-  transform: translateY(-1px);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .nav-cta:focus-visible {
-  outline: 2px solid var(--klein);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
-}
-
-.nav-cta-short {
-  display: none;
 }
 
 /* Anchor targets land clear of the fixed bar */
@@ -203,6 +215,17 @@ body.over-hero .nav-mark {
   color: var(--klein-tint);
 }
 
+body.over-hero .nav-cta {
+  color: var(--paper);
+  border-color: rgba(242, 241, 236, 0.45);
+}
+
+body.over-hero .nav-cta:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
 body.over-hero .nav-cta:focus-visible {
   outline-color: var(--paper);
 }
@@ -219,14 +242,6 @@ body.over-hero .nav-cta:focus-visible {
 
   .nav-cta {
     grid-column: 3;
-  }
-
-  .nav-cta-full {
-    display: none;
-  }
-
-  .nav-cta-short {
-    display: inline;
   }
 }
 

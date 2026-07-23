@@ -101,8 +101,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="nav-cta-full">Book a consultation</span>
-          <span className="nav-cta-short">Book</span>
+          Book
         </a>
       </nav>
 
