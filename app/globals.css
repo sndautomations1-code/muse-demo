@@ -143,30 +143,44 @@ body.over-hero .masthead-meta {
   top: 0;
   bottom: 0;
   right: -4vw;
-  width: 62%;
+  width: 78%;
   z-index: 2;
   animation: cover-fade 0.8s ease-out both;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.02) 10%,
-    rgba(0, 0, 0, 0.08) 20%,
-    rgba(0, 0, 0, 0.22) 30%,
-    rgba(0, 0, 0, 0.45) 40%,
-    rgba(0, 0, 0, 0.72) 50%,
-    rgba(0, 0, 0, 0.92) 60%,
-    #000 70%
+    rgba(0, 0, 0, 0.03) 12%,
+    rgba(0, 0, 0, 0.1) 24%,
+    rgba(0, 0, 0, 0.24) 36%,
+    rgba(0, 0, 0, 0.44) 48%,
+    rgba(0, 0, 0, 0.68) 60%,
+    rgba(0, 0, 0, 0.88) 72%,
+    #000 84%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.02) 10%,
-    rgba(0, 0, 0, 0.08) 20%,
-    rgba(0, 0, 0, 0.22) 30%,
-    rgba(0, 0, 0, 0.45) 40%,
-    rgba(0, 0, 0, 0.72) 50%,
-    rgba(0, 0, 0, 0.92) 60%,
-    #000 70%
+    rgba(0, 0, 0, 0.03) 12%,
+    rgba(0, 0, 0, 0.1) 24%,
+    rgba(0, 0, 0, 0.24) 36%,
+    rgba(0, 0, 0, 0.44) 48%,
+    rgba(0, 0, 0, 0.68) 60%,
+    rgba(0, 0, 0, 0.88) 72%,
+    #000 84%
+  );
+}
+
+/* Radial vignette — melts the plate’s midtones into every hero edge */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    130% 100% at 50% 42%,
+    transparent 52%,
+    rgba(22, 22, 26, 0.35) 100%
   );
 }
 
@@ -201,7 +215,7 @@ body.over-hero .masthead-meta {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 40% center;
+  object-position: 12% center;
   filter: grayscale(1) contrast(1.06) brightness(0.92);
 }
 
