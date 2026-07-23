@@ -63,6 +63,7 @@ const treatments = [
 
 import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
+import HeroAnnotations from "./hero-annotations";
 
 export default function Home() {
   return (
@@ -117,6 +118,7 @@ export default function Home() {
             </div>
           </div>
           <div className="cover-frame" aria-hidden="true"></div>
+          <HeroAnnotations />
           <div className="cover-eyebrow mono">
             <span>Advanced skin &amp; aesthetic treatments</span>
             <span className="cover-eyebrow-rule" aria-hidden="true"></span>
