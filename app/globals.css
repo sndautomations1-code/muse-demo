@@ -801,6 +801,73 @@ body.over-hero .nav-cta:focus-visible {
   color: var(--klein);
 }
 
+/* Card thumb — touch/<1024px stand-in for the plate column */
+.menu-thumb {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.06);
+  margin-top: 0.9rem;
+}
+
+/* Catalogue plate — desktop only; hidden entirely below 1024px */
+.menu-plate {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    display: grid;
+    grid-template-columns: 58fr 42fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .menu-index {
+    min-width: 0;
+  }
+
+  .menu-thumb {
+    display: none;
+  }
+
+  .menu-plate {
+    display: block;
+    position: sticky;
+    top: 7rem;
+    min-width: 0;
+  }
+
+  .menu-plate-frame {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: #ddd; /* no empty frame while (or if) a plate never loads */
+    overflow: hidden;
+  }
+
+  /* Two stacked layers — crossfade animates opacity only */
+  .menu-plate-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.06);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+  }
+
+  .menu-plate-frame img.is-front {
+    opacity: 1;
+  }
+
+  .menu-plate-caption {
+    margin-top: 0.8rem;
+    font-size: 0.65rem;
+  }
+}
+
 /* Annotation click-through: row flashes klein for 1.2s */
 .menu-row.flash {
   border-bottom-color: var(--klein);
@@ -834,6 +901,13 @@ body.over-hero .nav-cta:focus-visible {
     max-height: 18rem;
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Below 1024 the card also holds the thumb — give the reveal headroom */
+@media (hover: hover) and (pointer: fine) and (max-width: 1023.98px) {
+  .menu-row:hover .menu-card {
+    max-height: 32rem;
   }
 }
 

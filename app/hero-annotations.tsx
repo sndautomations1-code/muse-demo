@@ -1,5 +1,7 @@
 "use client";
 
+import { MENU_ACTIVATE_EVENT } from "./menu-catalogue";
+
 // Coordinates live in the photo's own pixel space (1376 x 768) — the
 // .callouts-img box replicates the drawn image exactly, so these track
 // anatomy at any viewport. Lines: label column at x 427, one 30° elbow,
@@ -29,6 +31,8 @@ const CALLOUTS = [
 ];
 
 function flash(no: string) {
+  // Make the flashed row the active one so the catalogue plate matches.
+  window.dispatchEvent(new CustomEvent(MENU_ACTIVATE_EVENT, { detail: no }));
   document.querySelectorAll(".menu-row").forEach((row) => {
     if (row.querySelector(".menu-no")?.textContent?.trim() !== no) return;
     window.setTimeout(() => row.classList.add("flash"), 400);

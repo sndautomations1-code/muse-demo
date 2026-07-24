@@ -1,69 +1,7 @@
-const treatments = [
-  {
-    no: "No. 01",
-    name: "Signature Hydrafacial",
-    category: "Skin Health",
-    duration: "50 min",
-    downtime: "None",
-    from: "£120",
-    bestFor: "Instant glow, congestion",
-    line: "Deep cleanse, gentle resurfacing and serum infusion in one sitting. Skin leaves brighter than it arrived.",
-  },
-  {
-    no: "No. 02",
-    name: "Anti-Wrinkle Injections",
-    category: "Injectables",
-    duration: "30 min",
-    downtime: "Minimal",
-    from: "£180",
-    bestFor: "Forehead, frown & eye lines",
-    line: "Precise, conservative dosing that softens expression lines while keeping the face moving. Consultation first, always.",
-  },
-  {
-    no: "No. 03",
-    name: "Dermal Fillers",
-    category: "Injectables",
-    duration: "45 min",
-    downtime: "24–48 h",
-    from: "£250",
-    bestFor: "Lips, cheeks, jawline",
-    line: "Structure restored a fraction of a millilitre at a time. Placed, never poured.",
-  },
-  {
-    no: "No. 04",
-    name: "Microneedling",
-    category: "Collagen Induction",
-    duration: "60 min",
-    downtime: "24 h",
-    from: "£150",
-    bestFor: "Texture, scarring, pores",
-    line: "Controlled micro-channels prompt the skin to rebuild itself. Texture refines over a series.",
-  },
-  {
-    no: "No. 05",
-    name: "Laser Skin Renewal",
-    category: "Correction",
-    duration: "40 min",
-    downtime: "48 h",
-    from: "£200",
-    bestFor: "Pigmentation, redness, tone",
-    line: "Calibrated light lifts pigment and diffuses redness toward one even register.",
-  },
-  {
-    no: "No. 06",
-    name: "Chemical Peel",
-    category: "Resurfacing",
-    duration: "35 min",
-    downtime: "3–5 days",
-    from: "£110",
-    bestFor: "Dullness, fine lines",
-    line: "A deliberate turnover of the surface — fresh skin, revealed on schedule.",
-  },
-];
-
 import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
 import HeroAnnotations from "./hero-annotations";
+import MenuCatalogue from "./menu-catalogue";
 
 export default function Home() {
   return (
@@ -158,32 +96,7 @@ export default function Home() {
           MEDICALLY SUPERVISED · CERTIFIED PRACTITIONERS · CE-MARKED DEVICES
         </p>
 
-        <section className="menu" id="menu">
-          <div className="menu-head">
-            <h2 className="section-title">The Menu</h2>
-            <p className="menu-hint mono">Hover a treatment for details</p>
-          </div>
-          <ul className="menu-list">
-            {treatments.map((t) => (
-              <li className="menu-row" key={t.no}>
-                <span className="menu-no mono">{t.no}</span>
-                <span className="menu-name-wrap">
-                  <span className="menu-name">{t.name}</span>
-                  <span className="menu-cat mono">{t.category}</span>
-                </span>
-                <span className="menu-duration mono">{t.duration}</span>
-                <div className="menu-card">
-                  <div className="menu-card-inner">
-                    <p className="menu-line">{t.line}</p>
-                    <p className="menu-spec mono">
-                      {`Downtime: ${t.downtime} · From ${t.from} · Best for: ${t.bestFor}`}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <MenuCatalogue />
 
         <section className="visit" id="visit">
           <figure className="plate">
