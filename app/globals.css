@@ -711,12 +711,62 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— 4.4 The Menu — catalogue-sheet card grid ——— */
 
 .sheet {
+  position: relative;
+  overflow: hidden; /* crops the rose flanks at the section edges */
   background: var(--paper);
   padding: clamp(4rem, 9vh, 7rem) var(--gutter);
+  --flora-height: 112%;
+  --flora-opacity: 1;
 }
 
-/* Slim paper header — title left, index right, hairline below */
+/* Rose line-art flanks — raw black-on-white asset; multiply knocks the
+   white out over paper, so no transparency processing. Desktop only. */
+.sheet-flora {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .sheet-flora {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    height: var(--flora-height);
+    width: auto;
+    max-width: none; /* escape the global img { max-width: 100% } */
+    mix-blend-mode: multiply;
+    opacity: var(--flora-opacity);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sheet-flora-left {
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .sheet-flora-right {
+    right: 0;
+    transform: translateY(-50%) scaleX(-1);
+  }
+}
+
+/* The sheet proper — opaque paper over the artwork, so the roses slide
+   under it; carries the grid's width constraint */
+.sheet-mask {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+/* Slim paper header — title left, index right, hairline below.
+   Part of the sheet: opaque paper above the rose flanks. */
 .sheet-head {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -746,8 +796,6 @@ body.over-hero .nav-cta:focus-visible {
   gap: 1px;
   background: var(--hair);
   border: 1px solid var(--hair);
-  max-width: var(--maxw);
-  margin: 0 auto;
 }
 
 .sheet-card {

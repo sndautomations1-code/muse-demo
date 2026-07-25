@@ -138,57 +138,75 @@ export default function MenuSheet() {
 
   return (
     <section className="sheet" id="menu">
+      {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
+      <img
+        className="sheet-flora sheet-flora-left"
+        src="/plates/roses.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
+      <img
+        className="sheet-flora sheet-flora-right"
+        src="/plates/roses.png"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
       <div className="sheet-head">
         <h2 className="sheet-title">The Menu</h2>
         <p className="sheet-meta mono">Six treatments · No. 01–06</p>
       </div>
 
-      <div className="sheet-grid" ref={grid}>
-        {treatments.map((t, i) => {
-          const no = cardNo(i);
-          return (
-            <article
-              className="sheet-card"
-              id={`plate-${no}`}
-              key={t.no}
-              title={t.bestFor}
-              style={{ "--card-delay": `${i * 70}ms` } as React.CSSProperties}
-            >
-              <CardPhoto
-                src={t.photo}
-                alt={`${t.name} — plate photograph`}
-                chip={`Plate ${no}`}
-                eager={i === 0}
-              />
-              <div className="sheet-body">
-                <p className="sheet-topline mono">
-                  <span className="sheet-eyebrow">{`${t.no} — ${t.category}`}</span>
-                  <span className="sheet-duration">{t.duration}</span>
-                </p>
-                <h3 className="sheet-name">{t.name}</h3>
-                <p className="sheet-desc">{t.description}</p>
-                <p className="sheet-downtime mono">{`Downtime: ${t.downtime}`}</p>
-                <div className="sheet-foot">
-                  <a
-                    className="sheet-enquire mono"
-                    href="https://splendessa.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Enquire{" "}
-                    <span className="sheet-enquire-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </a>
-                  <p className="sheet-price">
-                    <span className="sheet-price-from mono">From</span>
-                    {t.price}
+      <div className="sheet-mask">
+        <div className="sheet-grid" ref={grid}>
+          {treatments.map((t, i) => {
+            const no = cardNo(i);
+            return (
+              <article
+                className="sheet-card"
+                id={`plate-${no}`}
+                key={t.no}
+                title={t.bestFor}
+                style={{ "--card-delay": `${i * 70}ms` } as React.CSSProperties}
+              >
+                <CardPhoto
+                  src={t.photo}
+                  alt={`${t.name} — plate photograph`}
+                  chip={`Plate ${no}`}
+                  eager={i === 0}
+                />
+                <div className="sheet-body">
+                  <p className="sheet-topline mono">
+                    <span className="sheet-eyebrow">{`${t.no} — ${t.category}`}</span>
+                    <span className="sheet-duration">{t.duration}</span>
                   </p>
+                  <h3 className="sheet-name">{t.name}</h3>
+                  <p className="sheet-desc">{t.description}</p>
+                  <p className="sheet-downtime mono">{`Downtime: ${t.downtime}`}</p>
+                  <div className="sheet-foot">
+                    <a
+                      className="sheet-enquire mono"
+                      href="https://splendessa.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Enquire{" "}
+                      <span className="sheet-enquire-arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </a>
+                    <p className="sheet-price">
+                      <span className="sheet-price-from mono">From</span>
+                      {t.price}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </article>
-          );
-        })}
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
