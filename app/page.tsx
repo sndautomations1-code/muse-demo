@@ -45,8 +45,6 @@ export default function Home() {
         </a>
       </nav>
 
-      <div className="arch-frame" aria-hidden="true"></div>
-
       <main>
         <section className="hero">
           <CoverObserver />
