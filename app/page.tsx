@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
 import HeroAnnotations from "./hero-annotations";
@@ -100,9 +101,11 @@ export default function Home() {
 
         <section className="visit" id="visit">
           <figure className="plate">
-            <PlateImage
-              src="/plates/plate-01.jpg"
-              alt="A private treatment room at the clinic"
+            <Image
+              src="/images/plate-2.jpg"
+              alt="Treatment room with black plaster walls"
+              fill
+              sizes="(min-width: 900px) 45vw, 100vw"
             />
             <figcaption className="plate-caption mono">
               PLATE II — TREATMENT ROOM
