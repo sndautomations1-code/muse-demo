@@ -707,256 +707,259 @@ body.over-hero .nav-cta:focus-visible {
   text-align: center;
 }
 
-/* ——— 4.4 The Menu — intro band + Six Covers ——— */
+/* ——— 4.4 The Menu — The Plates, white split-screen panels ——— */
 
-/* One stacking context for the whole run, so the covers' ascending
-   z-indexes stay a local affair (and stay under the masthead). */
-.covers {
-  isolation: isolate;
-}
-
-/* The section's only paper element */
-.covers-intro {
+/* Slim paper header — title left, index right, hairline below */
+.plates-head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1.5rem;
-  padding: 2.5rem var(--gutter);
+  gap: 0.6rem 1.5rem;
+  padding-block: 2.5rem;
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--hair);
 }
 
-.covers-intro-title {
+.plates-title {
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
+  font-size: 2.4rem;
   line-height: 1;
   letter-spacing: -0.015em;
+  color: var(--ink);
 }
 
-.covers-intro-meta {
-  text-align: right;
-}
-
-/* Each cover holds at the top while the next rides over it */
-.plate-cover {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
+/* Panels — normal flow, mobile-first: photo stacked above content */
+.plates-panel {
+  position: relative;
+  background: var(--paper);
+  border-top: 1px solid var(--hair);
   overflow: hidden;
-  background: var(--ink);
-  display: flex;
-  flex-direction: column;
-  padding: clamp(5rem, 13vh, 7rem) var(--gutter) 1.5rem;
+  scroll-margin-top: 5.5rem;
 }
 
-/* Trailing scroll so cover 06 gets a full hold before The Visit arrives */
-.covers-spacer {
-  height: 100vh;
-  height: 100svh;
+/* Photo — full-bleed against the panel edges; the hard edge on paper is
+   intentional: no masks, no gradients, no border. The wrapper's solid
+   fill is also the 404 fallback, keeping the split intact. */
+.plates-photo {
+  position: relative;
+  background: #ecebe4;
+  aspect-ratio: 4 / 3;
 }
 
-/* Plate photograph — same left-edge dissolve as the hero portrait */
-.plate-photo {
+.plates-photo img {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 62vw;
-  z-index: 0;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.03) 12%,
-    rgba(0, 0, 0, 0.1) 24%,
-    rgba(0, 0, 0, 0.24) 36%,
-    rgba(0, 0, 0, 0.44) 48%,
-    rgba(0, 0, 0, 0.68) 60%,
-    rgba(0, 0, 0, 0.88) 72%,
-    #000 84%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.03) 12%,
-    rgba(0, 0, 0, 0.1) 24%,
-    rgba(0, 0, 0, 0.24) 36%,
-    rgba(0, 0, 0, 0.44) 48%,
-    rgba(0, 0, 0, 0.68) 60%,
-    rgba(0, 0, 0, 0.88) 72%,
-    #000 84%
-  );
-}
-
-.plate-photo img {
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.06) brightness(0.92);
+  filter: grayscale(1) contrast(1.06);
 }
 
-/* Radial vignette — the hero's recipe, melting the plate into every edge */
-.plate-cover::after {
-  content: "";
+.plates-chip {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(
-    130% 100% at 50% 42%,
-    transparent 52%,
-    rgba(22, 22, 26, 0.35) 100%
-  );
+  left: 1rem;
+  bottom: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.45rem 0.8rem;
 }
 
-.plate-content {
+/* Content — vertically centred stack; isolated so the watermark can sit
+   behind its own children on z-index -1 without slipping under paper */
+.plates-content {
   position: relative;
-  z-index: 2;
-  margin-block: auto; /* centred above the band */
-  width: 100%;
-  max-width: 46rem;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(2.5rem, 6vw, 5rem);
 }
 
-.plate-eyebrow {
-  color: var(--klein-tint);
+/* Oversized panel number — clipped by the panel's own overflow */
+.plates-watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+  font-size: 7rem;
+  line-height: 0.8;
+  color: var(--ink);
+  opacity: 0.06;
+  user-select: none;
+  pointer-events: none;
 }
 
-.plate-name {
+.plates-eyebrow {
+  color: var(--klein);
+}
+
+.plates-name {
   display: block;
   overflow: hidden; /* the entrance mask */
   margin-top: 1.25rem;
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(2.8rem, 6.5vw, 6rem);
-  line-height: 0.95;
+  font-size: clamp(2.4rem, 4vw, 5rem);
+  line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--paper);
+  color: var(--ink);
 }
 
-.plate-name-inner {
+.plates-name-inner {
   display: block;
   padding-bottom: 0.08em; /* keep descenders clear of the mask */
 }
 
-.plate-desc {
+.plates-desc {
   margin-top: 1.5rem;
   max-width: 40ch;
-  color: rgba(242, 241, 236, 0.78);
+  color: rgba(22, 22, 26, 0.8);
   font-size: clamp(1rem, 0.95rem + 0.35vw, 1.2rem);
 }
 
-.plate-spec {
+.plates-spec {
   margin-top: 2rem;
-  color: rgba(242, 241, 236, 0.55);
+  font-size: 0.7rem;
 }
 
-.plate-spec-value {
-  color: var(--klein-tint);
+.plates-spec-value {
+  color: var(--klein);
 }
 
-/* Bottom metadata band — the cover band's construction, inside the plate */
-.plate-band {
-  position: relative;
-  z-index: 2;
-  padding-top: 2.5rem;
-  display: flex;
-  justify-content: space-between;
+.plates-pairs {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+}
+
+.plates-pairs-link {
+  text-decoration: none;
+  transition: color 0.25s var(--ease);
+}
+
+.plates-pairs-link:hover {
+  color: var(--klein);
+}
+
+.plates-enquire {
+  display: inline-flex;
   align-items: baseline;
-  gap: 1rem;
-  color: rgba(242, 241, 236, 0.5);
+  gap: 0.6em;
+  margin-top: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.25s var(--ease);
 }
 
-.plate-band-right {
-  text-align: right;
+.plates-enquire-arrow {
+  transition: transform 0.3s var(--ease);
+}
+
+.plates-enquire:hover {
+  color: var(--klein);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--klein);
+  text-underline-offset: 6px;
+}
+
+.plates-enquire:hover .plates-enquire-arrow {
+  transform: translateX(4px);
+}
+
+.plates-index {
+  margin-top: 2.5rem;
+  font-size: 0.65rem;
 }
 
 /* Entrance — armed from JS so a no-JS render arrives finished */
-.covers-stack.is-armed .plate-name-inner {
+.plates.is-armed .plates-name-inner {
   transform: translateY(110%);
-  transition: transform 0.8s var(--ease);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.covers-stack.is-armed .plate-eyebrow,
-.covers-stack.is-armed .plate-desc,
-.covers-stack.is-armed .plate-spec {
+.plates.is-armed .plates-eyebrow,
+.plates.is-armed .plates-desc,
+.plates.is-armed .plates-spec,
+.plates.is-armed .plates-pairs,
+.plates.is-armed .plates-enquire {
   opacity: 0;
   transition: opacity 0.6s var(--ease) 0.4s;
 }
 
-.covers-stack.is-armed .in-view .plate-name-inner {
+.plates.is-armed .plates-photo img {
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+}
+
+.plates.is-armed .in-view .plates-name-inner {
   transform: translateY(0);
 }
 
-.covers-stack.is-armed .in-view .plate-eyebrow,
-.covers-stack.is-armed .in-view .plate-desc,
-.covers-stack.is-armed .in-view .plate-spec {
+.plates.is-armed .in-view .plates-eyebrow,
+.plates.is-armed .in-view .plates-desc,
+.plates.is-armed .in-view .plates-spec,
+.plates.is-armed .in-view .plates-pairs,
+.plates.is-armed .in-view .plates-enquire {
   opacity: 1;
 }
 
-/* Annotation click-through: the cover's eyebrow and name flash klein and
-   settle back over 1.2s */
-.plate-cover.flash .plate-name {
-  animation: plate-flash-name 1.2s var(--ease);
+.plates.is-armed .in-view .plates-photo img {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.plate-cover.flash .plate-eyebrow {
-  animation: plate-flash-eyebrow 1.2s var(--ease);
+/* Annotation click-through: the panel's eyebrow and name flash klein and
+   settle back to ink over 1.2s */
+.plates-panel.flash .plates-name {
+  animation: plates-flash 1.2s var(--ease);
 }
 
-@keyframes plate-flash-name {
+.plates-panel.flash .plates-eyebrow {
+  animation: plates-flash 1.2s var(--ease);
+}
+
+@keyframes plates-flash {
   from {
-    color: var(--klein-tint);
+    color: var(--klein);
   }
   to {
-    color: var(--paper);
+    color: var(--ink);
   }
 }
 
-@keyframes plate-flash-eyebrow {
-  from {
-    color: var(--paper);
-  }
-  to {
-    color: var(--klein-tint);
-  }
-}
-
-@media (max-width: 899px) {
-  /* Sticky off — the covers become a plain stack of full-height panels */
-  .plate-cover {
-    position: static;
-    height: auto;
+@media (min-width: 900px) {
+  /* Split screen: content | photo. Photo width alternates per panel via
+     --photo-w (45% / 52% / 40%) to break the monotony. */
+  .plates-panel {
     min-height: 100vh;
     min-height: 100svh;
-    padding-top: clamp(6rem, 16vh, 8rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--photo-w, 45%);
   }
 
-  .covers-spacer {
-    display: none;
+  .plates-photo {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: auto;
   }
 
-  /* Photo becomes the full-bleed background under the type */
-  .plate-photo {
-    left: 0;
-    right: 0;
-    width: 100%;
-    -webkit-mask-image: none;
-    mask-image: none;
+  .plates-content {
+    grid-column: 1;
+    grid-row: 1;
   }
 
-  .plate-photo img {
-    opacity: 0.45;
-  }
-
-  .plate-photo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, var(--ink) 30%, rgba(22, 22, 26, 0.35));
-  }
-
-  .plate-content {
-    max-width: none;
+  .plates-watermark {
+    font-size: 15rem;
   }
 }
 
@@ -1150,16 +1153,6 @@ body.over-hero .nav-cta:focus-visible {
 
 /* ——— Responsive ——— */
 
-@media (max-width: 719px) {
-  .covers-intro {
-    display: block;
-  }
-
-  .covers-intro-meta {
-    margin-top: 0.6rem;
-    text-align: left;
-  }
-}
 
 /* ——— Reduced motion: static page, everything visible ——— */
 
@@ -1177,13 +1170,20 @@ body.over-hero .nav-cta:focus-visible {
 
   /* The armed entrance state would otherwise stick with no transition
      left to release it */
-  .covers-stack.is-armed .plate-name-inner {
+  .plates.is-armed .plates-name-inner {
     transform: none !important;
   }
 
-  .covers-stack.is-armed .plate-eyebrow,
-  .covers-stack.is-armed .plate-desc,
-  .covers-stack.is-armed .plate-spec {
+  .plates.is-armed .plates-eyebrow,
+  .plates.is-armed .plates-desc,
+  .plates.is-armed .plates-spec,
+  .plates.is-armed .plates-pairs,
+  .plates.is-armed .plates-enquire {
     opacity: 1 !important;
+  }
+
+  .plates.is-armed .plates-photo img {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
