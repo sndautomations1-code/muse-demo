@@ -10,6 +10,7 @@
   --grey: #737079;
   --hair: rgba(22, 22, 26, 0.16);
   --gutter: clamp(1.25rem, 5vw, 4rem);
+  --maxw: 82rem;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -709,6 +710,11 @@ body.over-hero .nav-cta:focus-visible {
 
 /* ——— 4.4 The Menu — catalogue-sheet card grid ——— */
 
+.sheet {
+  background: var(--paper);
+  padding: clamp(4rem, 9vh, 7rem) var(--gutter);
+}
+
 /* Slim paper header — title left, index right, hairline below */
 .sheet-head {
   display: flex;
@@ -716,8 +722,9 @@ body.over-hero .nav-cta:focus-visible {
   justify-content: space-between;
   align-items: baseline;
   gap: 0.6rem 1.5rem;
-  padding-block: 2.5rem;
-  padding-inline: var(--gutter);
+  max-width: var(--maxw);
+  margin: 0 auto 3rem;
+  padding-bottom: 2.5rem;
   border-bottom: 1px solid var(--hair);
 }
 
@@ -739,7 +746,8 @@ body.over-hero .nav-cta:focus-visible {
   gap: 1px;
   background: var(--hair);
   border: 1px solid var(--hair);
-  margin: 2.5rem var(--gutter) clamp(3.5rem, 7vw, 6rem);
+  max-width: var(--maxw);
+  margin: 0 auto;
 }
 
 .sheet-card {
@@ -749,11 +757,13 @@ body.over-hero .nav-cta:focus-visible {
   scroll-margin-top: 6rem;
 }
 
-/* Photo frame — its solid fill is also the 404 fallback, and its
+/* Photo frame — landscape, inset in the card on a paper margin rather
+   than full-bleed. Its solid fill is also the 404 fallback, and its
    overflow contains the hover zoom */
 .sheet-photo {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
+  margin: 1.25rem 1.25rem 0;
   overflow: hidden;
   background: #ecebe4;
 }
@@ -782,7 +792,7 @@ body.over-hero .nav-cta:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.5rem;
+  padding: 1.75rem 1.5rem 1.5rem;
 }
 
 .sheet-topline {
@@ -803,36 +813,56 @@ body.over-hero .nav-cta:focus-visible {
 }
 
 .sheet-name {
-  margin-top: 0.9rem;
+  margin-top: 0.6rem;
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
   line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--ink);
 }
 
 .sheet-desc {
-  margin-block: 0.75rem;
+  margin-block: 0.8rem;
   font-size: 0.95rem;
-  color: rgba(22, 22, 26, 0.78);
+  color: rgba(22, 22, 26, 0.76);
 }
 
-.sheet-spec {
-  font-size: 0.65rem;
+/* margin-top auto pins the downtime + foot block to the card floor
+   (card = flex column) */
+.sheet-downtime {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-size: 0.62rem;
 }
 
-.sheet-spec-value {
+.sheet-foot {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.sheet-price {
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  line-height: 1;
   color: var(--klein);
+  white-space: nowrap;
 }
 
-/* margin-top auto pins the link to the card floor (card = flex column) */
+.sheet-price-from {
+  font-size: 0.6rem;
+  margin-right: 0.4rem;
+}
+
 .sheet-enquire {
   display: inline-flex;
   align-items: baseline;
   gap: 0.6em;
-  margin-top: auto;
-  padding-top: 1.25rem;
   font-size: 0.68rem;
   letter-spacing: 0.2em;
   color: var(--ink);
@@ -925,6 +955,10 @@ body.over-hero .nav-cta:focus-visible {
 @media (min-width: 1100px) {
   .sheet-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sheet-card {
+    min-height: 30rem;
   }
 }
 

@@ -167,22 +167,24 @@ export default function MenuSheet() {
                 </p>
                 <h3 className="sheet-name">{t.name}</h3>
                 <p className="sheet-desc">{t.description}</p>
-                <p className="sheet-spec mono">
-                  Downtime:{" "}
-                  <span className="sheet-spec-value">{t.downtime}</span> · From{" "}
-                  <span className="sheet-spec-value">{t.price}</span>
-                </p>
-                <a
-                  className="sheet-enquire mono"
-                  href="https://splendessa.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Enquire{" "}
-                  <span className="sheet-enquire-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </a>
+                <p className="sheet-downtime mono">{`Downtime: ${t.downtime}`}</p>
+                <div className="sheet-foot">
+                  <a
+                    className="sheet-enquire mono"
+                    href="https://splendessa.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Enquire{" "}
+                    <span className="sheet-enquire-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </a>
+                  <p className="sheet-price">
+                    <span className="sheet-price-from mono">From</span>
+                    {t.price}
+                  </p>
+                </div>
               </div>
             </article>
           );
