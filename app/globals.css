@@ -738,6 +738,23 @@ body.over-hero .nav-cta:focus-visible {
     opacity: var(--flora-opacity);
     pointer-events: none;
     user-select: none;
+    /* dissolve toward the bottom instead of cutting off */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 55%,
+      rgba(0, 0, 0, 0.7) 70%,
+      rgba(0, 0, 0, 0.35) 82%,
+      transparent 94%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 55%,
+      rgba(0, 0, 0, 0.7) 70%,
+      rgba(0, 0, 0, 0.35) 82%,
+      transparent 94%
+    );
   }
 
   .sheet-flora-left {
