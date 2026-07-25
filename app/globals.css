@@ -707,10 +707,10 @@ body.over-hero .nav-cta:focus-visible {
   text-align: center;
 }
 
-/* ——— 4.4 The Menu — The Plates, white split-screen panels ——— */
+/* ——— 4.4 The Menu — catalogue-sheet card grid ——— */
 
 /* Slim paper header — title left, index right, hairline below */
-.plates-head {
+.sheet-head {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -721,7 +721,7 @@ body.over-hero .nav-cta:focus-visible {
   border-bottom: 1px solid var(--hair);
 }
 
-.plates-title {
+.sheet-title {
   font-family: var(--font-display), serif;
   font-weight: 500;
   font-size: 2.4rem;
@@ -730,25 +730,35 @@ body.over-hero .nav-cta:focus-visible {
   color: var(--ink);
 }
 
-/* Panels — normal flow, mobile-first: photo stacked above content */
-.plates-panel {
-  position: relative;
+/* The sheet: 1px gaps over a --hair backdrop draw shared hairline
+   separators — cards touch through rules like a printed catalogue.
+   No radius, no shadow, no whitespace gutters. */
+.sheet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  margin: 2.5rem var(--gutter) clamp(3.5rem, 7vw, 6rem);
+}
+
+.sheet-card {
+  display: flex;
+  flex-direction: column;
   background: var(--paper);
-  border-top: 1px solid var(--hair);
-  overflow: hidden;
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 6rem;
 }
 
-/* Photo — full-bleed against the panel edges; the hard edge on paper is
-   intentional: no masks, no gradients, no border. The wrapper's solid
-   fill is also the 404 fallback, keeping the split intact. */
-.plates-photo {
+/* Photo frame — its solid fill is also the 404 fallback, and its
+   overflow contains the hover zoom */
+.sheet-photo {
   position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
   background: #ecebe4;
-  aspect-ratio: 4 / 3;
 }
 
-.plates-photo img {
+.sheet-photo img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -757,209 +767,164 @@ body.over-hero .nav-cta:focus-visible {
   filter: grayscale(1) contrast(1.06);
 }
 
-.plates-chip {
+.sheet-chip {
   position: absolute;
   left: 1rem;
   bottom: 1rem;
   background: var(--paper);
   color: var(--ink);
   padding: 0.45rem 0.8rem;
-}
-
-/* Content — vertically centred stack; isolated so the watermark can sit
-   behind its own children on z-index -1 without slipping under paper */
-.plates-content {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: clamp(2.5rem, 6vw, 5rem);
-}
-
-/* Oversized panel number — clipped by the panel's own overflow */
-.plates-watermark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  font-family: var(--font-display), serif;
-  font-weight: 500;
-  font-size: 7rem;
-  line-height: 0.8;
-  color: var(--ink);
-  opacity: 0.06;
-  user-select: none;
-  pointer-events: none;
-}
-
-.plates-eyebrow {
-  color: var(--klein);
-}
-
-.plates-name {
-  display: block;
-  overflow: hidden; /* the entrance mask */
-  margin-top: 1.25rem;
-  font-family: var(--font-display), serif;
-  font-weight: 500;
-  font-size: clamp(2.4rem, 4vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.plates-name-inner {
-  display: block;
-  padding-bottom: 0.08em; /* keep descenders clear of the mask */
-}
-
-.plates-desc {
-  margin-top: 1.5rem;
-  max-width: 40ch;
-  color: rgba(22, 22, 26, 0.8);
-  font-size: clamp(1rem, 0.95rem + 0.35vw, 1.2rem);
-}
-
-.plates-spec {
-  margin-top: 2rem;
-  font-size: 0.7rem;
-}
-
-.plates-spec-value {
-  color: var(--klein);
-}
-
-.plates-pairs {
-  margin-top: 1rem;
-  font-size: 0.65rem;
-}
-
-.plates-pairs-link {
-  text-decoration: none;
   transition: color 0.25s var(--ease);
 }
 
-.plates-pairs-link:hover {
+.sheet-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+
+.sheet-topline {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.62rem;
+}
+
+.sheet-eyebrow {
   color: var(--klein);
 }
 
-.plates-enquire {
+.sheet-duration {
+  white-space: nowrap;
+}
+
+.sheet-name {
+  margin-top: 0.9rem;
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.sheet-desc {
+  margin-block: 0.75rem;
+  font-size: 0.95rem;
+  color: rgba(22, 22, 26, 0.78);
+}
+
+.sheet-spec {
+  font-size: 0.65rem;
+}
+
+.sheet-spec-value {
+  color: var(--klein);
+}
+
+/* margin-top auto pins the link to the card floor (card = flex column) */
+.sheet-enquire {
   display: inline-flex;
   align-items: baseline;
   gap: 0.6em;
-  margin-top: 2rem;
-  font-size: 0.72rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-size: 0.68rem;
   letter-spacing: 0.2em;
   color: var(--ink);
   text-decoration: none;
   transition: color 0.25s var(--ease);
 }
 
-.plates-enquire-arrow {
+.sheet-enquire-arrow {
   transition: transform 0.3s var(--ease);
 }
 
-.plates-enquire:hover {
+.sheet-enquire:hover {
   color: var(--klein);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--klein);
-  text-underline-offset: 6px;
 }
 
-.plates-enquire:hover .plates-enquire-arrow {
+.sheet-enquire:hover .sheet-enquire-arrow {
   transform: translateX(4px);
 }
 
-.plates-index {
-  margin-top: 2.5rem;
-  font-size: 0.65rem;
+/* Hover — desktop pointers only: the photo breathes, nothing else moves */
+@media (hover: hover) and (pointer: fine) {
+  .sheet-photo img {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sheet-card:hover .sheet-photo img {
+    transform: scale(1.03);
+  }
+
+  .sheet-card:hover .sheet-chip {
+    color: var(--klein);
+  }
 }
 
-/* Entrance — armed from JS so a no-JS render arrives finished */
-.plates.is-armed .plates-name-inner {
-  transform: translateY(110%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.plates.is-armed .plates-eyebrow,
-.plates.is-armed .plates-desc,
-.plates.is-armed .plates-spec,
-.plates.is-armed .plates-pairs,
-.plates.is-armed .plates-enquire {
+/* Entrance — armed from JS so a no-JS render arrives finished;
+   cards fade + rise, staggered by grid order via --card-delay */
+.sheet-grid.is-armed .sheet-card {
   opacity: 0;
-  transition: opacity 0.6s var(--ease) 0.4s;
-}
-
-.plates.is-armed .plates-photo img {
-  opacity: 0;
-  transform: scale(1.02);
+  transform: translateY(12px);
   transition:
     opacity 0.6s var(--ease),
     transform 0.6s var(--ease);
+  transition-delay: var(--card-delay, 0ms);
 }
 
-.plates.is-armed .in-view .plates-name-inner {
+.sheet-grid.is-armed .sheet-card.in-view {
+  opacity: 1;
   transform: translateY(0);
 }
 
-.plates.is-armed .in-view .plates-eyebrow,
-.plates.is-armed .in-view .plates-desc,
-.plates.is-armed .in-view .plates-spec,
-.plates.is-armed .in-view .plates-pairs,
-.plates.is-armed .in-view .plates-enquire {
-  opacity: 1;
+/* Annotation click-through: eyebrow pulses klein→ink and a 1px klein
+   outline fades out over 1.2s */
+.sheet-card.flash {
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  animation: sheet-flash-outline 1.2s var(--ease);
 }
 
-.plates.is-armed .in-view .plates-photo img {
-  opacity: 1;
-  transform: scale(1);
+.sheet-card.flash .sheet-eyebrow {
+  animation: sheet-flash-eyebrow 1.2s var(--ease);
 }
 
-/* Annotation click-through: the panel's eyebrow and name flash klein and
-   settle back to ink over 1.2s */
-.plates-panel.flash .plates-name {
-  animation: plates-flash 1.2s var(--ease);
-}
-
-.plates-panel.flash .plates-eyebrow {
-  animation: plates-flash 1.2s var(--ease);
-}
-
-@keyframes plates-flash {
+@keyframes sheet-flash-outline {
   from {
-    color: var(--klein);
+    outline-color: var(--klein);
   }
   to {
-    color: var(--ink);
+    outline-color: transparent;
   }
 }
 
-@media (min-width: 900px) {
-  /* Split screen: content | photo. Photo width alternates per panel via
-     --photo-w (45% / 52% / 40%) to break the monotony. */
-  .plates-panel {
-    min-height: 100vh;
-    min-height: 100svh;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--photo-w, 45%);
+@keyframes sheet-flash-eyebrow {
+  0% {
+    color: var(--klein);
   }
-
-  .plates-photo {
-    grid-column: 2;
-    grid-row: 1;
-    aspect-ratio: auto;
+  40% {
+    color: var(--ink);
   }
-
-  .plates-content {
-    grid-column: 1;
-    grid-row: 1;
+  100% {
+    color: var(--klein);
   }
+}
 
-  .plates-watermark {
-    font-size: 15rem;
+@media (min-width: 640px) {
+  .sheet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .sheet-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -1170,19 +1135,7 @@ body.over-hero .nav-cta:focus-visible {
 
   /* The armed entrance state would otherwise stick with no transition
      left to release it */
-  .plates.is-armed .plates-name-inner {
-    transform: none !important;
-  }
-
-  .plates.is-armed .plates-eyebrow,
-  .plates.is-armed .plates-desc,
-  .plates.is-armed .plates-spec,
-  .plates.is-armed .plates-pairs,
-  .plates.is-armed .plates-enquire {
-    opacity: 1 !important;
-  }
-
-  .plates.is-armed .plates-photo img {
+  .sheet-grid.is-armed .sheet-card {
     opacity: 1 !important;
     transform: none !important;
   }

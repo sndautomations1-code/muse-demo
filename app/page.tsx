@@ -1,7 +1,7 @@
 import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
 import HeroAnnotations from "./hero-annotations";
-import ThePlates from "./the-plates";
+import MenuSheet from "./menu-sheet";
 
 export default function Home() {
   return (
@@ -96,7 +96,7 @@ export default function Home() {
           MEDICALLY SUPERVISED · CERTIFIED PRACTITIONERS · CE-MARKED DEVICES
         </p>
 
-        <ThePlates />
+        <MenuSheet />
 
         <section className="visit" id="visit">
           <figure className="plate">
