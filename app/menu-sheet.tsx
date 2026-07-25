@@ -138,22 +138,6 @@ export default function MenuSheet() {
 
   return (
     <section className="sheet" id="menu">
-      {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
-      <img
-        className="sheet-flora sheet-flora-left"
-        src="/plates/roses.png"
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-      />
-      {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
-      <img
-        className="sheet-flora sheet-flora-right"
-        src="/plates/roses.png"
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-      />
       <div className="sheet-head">
         <h2 className="sheet-title">The Menu</h2>
         <p className="sheet-meta mono">Six treatments · No. 01–06</p>
