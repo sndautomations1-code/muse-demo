@@ -707,207 +707,256 @@ body.over-hero .nav-cta:focus-visible {
   text-align: center;
 }
 
-/* ——— 4.4 The Menu ——— */
+/* ——— 4.4 The Menu — intro band + Six Covers ——— */
 
-.menu {
-  padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
-  max-width: 82rem;
-  margin: 0 auto;
+/* One stacking context for the whole run, so the covers' ascending
+   z-indexes stay a local affair (and stay under the masthead). */
+.covers {
+  isolation: isolate;
 }
 
-.section-title {
+/* The section's only paper element */
+.covers-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 2.5rem var(--gutter);
+}
+
+.covers-intro-title {
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(2.4rem, 1.6rem + 3.2vw, 4.25rem);
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem);
   line-height: 1;
   letter-spacing: -0.015em;
 }
 
-.menu-head {
+.covers-intro-meta {
+  text-align: right;
+}
+
+/* Each cover holds at the top while the next rides over it */
+.plate-cover {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 1.5rem;
-  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  flex-direction: column;
+  padding: clamp(5rem, 13vh, 7rem) var(--gutter) 1.5rem;
 }
 
-.menu-hint {
-  padding-bottom: 0.35rem;
+/* Trailing scroll so cover 06 gets a full hold before The Visit arrives */
+.covers-spacer {
+  height: 100vh;
+  height: 100svh;
 }
 
-.menu-list {
-  list-style: none;
-  border-top: 2px solid var(--ink);
+/* Plate photograph — same left-edge dissolve as the hero portrait */
+.plate-photo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 62vw;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 12%,
+    rgba(0, 0, 0, 0.1) 24%,
+    rgba(0, 0, 0, 0.24) 36%,
+    rgba(0, 0, 0, 0.44) 48%,
+    rgba(0, 0, 0, 0.68) 60%,
+    rgba(0, 0, 0, 0.88) 72%,
+    #000 84%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.03) 12%,
+    rgba(0, 0, 0, 0.1) 24%,
+    rgba(0, 0, 0, 0.24) 36%,
+    rgba(0, 0, 0, 0.44) 48%,
+    rgba(0, 0, 0, 0.68) 60%,
+    rgba(0, 0, 0, 0.88) 72%,
+    #000 84%
+  );
 }
 
-.menu-row {
-  display: grid;
-  grid-template-columns: minmax(6.75rem, auto) 1fr auto;
-  column-gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: baseline;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--hair);
-  transition: padding-left 0.5s var(--ease);
+.plate-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.06) brightness(0.92);
 }
 
-.menu-no {
-  grid-column: 1;
-  transition: color 0.5s var(--ease);
+/* Radial vignette — the hero's recipe, melting the plate into every edge */
+.plate-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    130% 100% at 50% 42%,
+    transparent 52%,
+    rgba(22, 22, 26, 0.35) 100%
+  );
 }
 
-.menu-name-wrap {
-  grid-column: 2;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: 1.25rem;
-  row-gap: 0.2rem;
+.plate-content {
+  position: relative;
+  z-index: 2;
+  margin-block: auto; /* centred above the band */
+  width: 100%;
+  max-width: 46rem;
 }
 
-.menu-name {
+.plate-eyebrow {
+  color: var(--klein-tint);
+}
+
+.plate-name {
+  display: block;
+  overflow: hidden; /* the entrance mask */
+  margin-top: 1.25rem;
   font-family: var(--font-display), serif;
   font-weight: 500;
-  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.4rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--paper);
 }
 
-.menu-duration {
-  grid-column: 3;
-  justify-self: end;
-  white-space: nowrap;
+.plate-name-inner {
+  display: block;
+  padding-bottom: 0.08em; /* keep descenders clear of the mask */
 }
 
-/* Treatment card — expanded by default (touch, reduced motion, no-hover) */
-.menu-card {
-  grid-column: 2 / 4;
-  overflow: hidden;
+.plate-desc {
+  margin-top: 1.5rem;
+  max-width: 40ch;
+  color: rgba(242, 241, 236, 0.78);
+  font-size: clamp(1rem, 0.95rem + 0.35vw, 1.2rem);
 }
 
-.menu-card-inner {
-  border-left: 2px solid var(--klein);
-  padding: 0.25rem 0 0.35rem 1.15rem;
-  margin: 0.9rem 0 0.2rem;
-  max-width: 44rem;
+.plate-spec {
+  margin-top: 2rem;
+  color: rgba(242, 241, 236, 0.55);
 }
 
-.menu-line {
-  font-size: 0.95rem;
-  max-width: 52ch;
+.plate-spec-value {
+  color: var(--klein-tint);
 }
 
-.menu-spec {
-  margin-top: 0.7rem;
-  color: var(--klein);
+/* Bottom metadata band — the cover band's construction, inside the plate */
+.plate-band {
+  position: relative;
+  z-index: 2;
+  padding-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  color: rgba(242, 241, 236, 0.5);
 }
 
-/* Card thumb — touch/<1024px stand-in for the plate column */
-.menu-thumb {
-  width: 100%;
-  max-width: 240px;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.06);
-  margin-top: 0.9rem;
+.plate-band-right {
+  text-align: right;
 }
 
-/* Catalogue plate — desktop only; hidden entirely below 1024px */
-.menu-plate {
-  display: none;
+/* Entrance — armed from JS so a no-JS render arrives finished */
+.covers-stack.is-armed .plate-name-inner {
+  transform: translateY(110%);
+  transition: transform 0.8s var(--ease);
 }
 
-@media (min-width: 1024px) {
-  .menu {
-    display: grid;
-    grid-template-columns: 58fr 42fr;
-    gap: 4rem;
-    align-items: start;
+.covers-stack.is-armed .plate-eyebrow,
+.covers-stack.is-armed .plate-desc,
+.covers-stack.is-armed .plate-spec {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease) 0.4s;
+}
+
+.covers-stack.is-armed .in-view .plate-name-inner {
+  transform: translateY(0);
+}
+
+.covers-stack.is-armed .in-view .plate-eyebrow,
+.covers-stack.is-armed .in-view .plate-desc,
+.covers-stack.is-armed .in-view .plate-spec {
+  opacity: 1;
+}
+
+/* Annotation click-through: the cover's eyebrow and name flash klein and
+   settle back over 1.2s */
+.plate-cover.flash .plate-name {
+  animation: plate-flash-name 1.2s var(--ease);
+}
+
+.plate-cover.flash .plate-eyebrow {
+  animation: plate-flash-eyebrow 1.2s var(--ease);
+}
+
+@keyframes plate-flash-name {
+  from {
+    color: var(--klein-tint);
+  }
+  to {
+    color: var(--paper);
+  }
+}
+
+@keyframes plate-flash-eyebrow {
+  from {
+    color: var(--paper);
+  }
+  to {
+    color: var(--klein-tint);
+  }
+}
+
+@media (max-width: 899px) {
+  /* Sticky off — the covers become a plain stack of full-height panels */
+  .plate-cover {
+    position: static;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: clamp(6rem, 16vh, 8rem);
   }
 
-  .menu-index {
-    min-width: 0;
-  }
-
-  .menu-thumb {
+  .covers-spacer {
     display: none;
   }
 
-  .menu-plate {
-    display: block;
-    position: sticky;
-    top: 7rem;
-    min-width: 0;
+  /* Photo becomes the full-bleed background under the type */
+  .plate-photo {
+    left: 0;
+    right: 0;
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
-  .menu-plate-frame {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    background: #ddd; /* no empty frame while (or if) a plate never loads */
-    overflow: hidden;
+  .plate-photo img {
+    opacity: 0.45;
   }
 
-  /* Two stacked layers — crossfade animates opacity only */
-  .menu-plate-frame img {
+  .plate-photo::after {
+    content: "";
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.06);
-    opacity: 0;
-    transition: opacity 0.35s var(--ease);
+    background: linear-gradient(to top, var(--ink) 30%, rgba(22, 22, 26, 0.35));
   }
 
-  .menu-plate-frame img.is-front {
-    opacity: 1;
-  }
-
-  .menu-plate-caption {
-    margin-top: 0.8rem;
-    font-size: 0.65rem;
-  }
-}
-
-/* Annotation click-through: row flashes klein for 1.2s */
-.menu-row.flash {
-  border-bottom-color: var(--klein);
-}
-
-.menu-row.flash .menu-no {
-  color: var(--klein);
-}
-
-/* Hover-capable devices: cards collapse, reveal on row hover */
-@media (hover: hover) and (pointer: fine) {
-  .menu-card {
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-0.5rem);
-    transition:
-      max-height 0.5s var(--ease),
-      opacity 0.5s var(--ease),
-      transform 0.5s var(--ease);
-  }
-
-  .menu-row:hover {
-    padding-left: 1.25rem;
-  }
-
-  .menu-row:hover .menu-no {
-    color: var(--klein);
-  }
-
-  .menu-row:hover .menu-card {
-    max-height: 18rem;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Below 1024 the card also holds the thumb — give the reveal headroom */
-@media (hover: hover) and (pointer: fine) and (max-width: 1023.98px) {
-  .menu-row:hover .menu-card {
-    max-height: 32rem;
+  .plate-content {
+    max-width: none;
   }
 }
 
@@ -1102,25 +1151,13 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— Responsive ——— */
 
 @media (max-width: 719px) {
-  .menu-row {
-    grid-template-columns: 1fr auto;
-    row-gap: 0.45rem;
+  .covers-intro {
+    display: block;
   }
 
-  .menu-no {
-    grid-column: 1 / -1;
-  }
-
-  .menu-name-wrap {
-    grid-column: 1;
-  }
-
-  .menu-duration {
-    grid-column: 2;
-  }
-
-  .menu-card {
-    grid-column: 1 / -1;
+  .covers-intro-meta {
+    margin-top: 0.6rem;
+    text-align: left;
   }
 }
 
@@ -1138,9 +1175,15 @@ body.over-hero .nav-cta:focus-visible {
     scroll-behavior: auto;
   }
 
-  .menu-card {
-    max-height: none !important;
-    opacity: 1 !important;
+  /* The armed entrance state would otherwise stick with no transition
+     left to release it */
+  .covers-stack.is-armed .plate-name-inner {
     transform: none !important;
+  }
+
+  .covers-stack.is-armed .plate-eyebrow,
+  .covers-stack.is-armed .plate-desc,
+  .covers-stack.is-armed .plate-spec {
+    opacity: 1 !important;
   }
 }

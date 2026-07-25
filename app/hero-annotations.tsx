@@ -1,7 +1,5 @@
 "use client";
 
-import { MENU_ACTIVATE_EVENT } from "./menu-catalogue";
-
 // Coordinates live in the photo's own pixel space (1376 x 768) — the
 // .callouts-img box replicates the drawn image exactly, so these track
 // anatomy at any viewport. Lines: label column at x 427, one 30° elbow,
@@ -9,6 +7,7 @@ import { MENU_ACTIVATE_EVENT } from "./menu-catalogue";
 const CALLOUTS = [
   {
     no: "No. 01",
+    cover: "plate-01",
     label: "the glow",
     y: 45,
     points: "430,345.6 468.7,345.6 561.3,292.2",
@@ -16,6 +15,7 @@ const CALLOUTS = [
   },
   {
     no: "No. 03",
+    cover: "plate-03",
     label: "the jawline",
     y: 55.5,
     points: "430,426.2 479.9,426.2 594.3,360.2",
@@ -23,6 +23,7 @@ const CALLOUTS = [
   },
   {
     no: "No. 05",
+    cover: "plate-05",
     label: "even tone",
     y: 66,
     points: "430,506.9 484.6,506.9 593.3,444.2",
@@ -30,14 +31,13 @@ const CALLOUTS = [
   },
 ];
 
-function flash(no: string) {
-  // Make the flashed row the active one so the catalogue plate matches.
-  window.dispatchEvent(new CustomEvent(MENU_ACTIVATE_EVENT, { detail: no }));
-  document.querySelectorAll(".menu-row").forEach((row) => {
-    if (row.querySelector(".menu-no")?.textContent?.trim() !== no) return;
-    window.setTimeout(() => row.classList.add("flash"), 400);
-    window.setTimeout(() => row.classList.remove("flash"), 1600);
-  });
+// The anchor does the scrolling; the flash lands once that scroll is
+// underway and runs for its own 1.2s animation.
+function flash(id: string) {
+  const cover = document.getElementById(id);
+  if (!cover) return;
+  window.setTimeout(() => cover.classList.add("flash"), 400);
+  window.setTimeout(() => cover.classList.remove("flash"), 1600);
 }
 
 export default function HeroAnnotations() {
@@ -67,9 +67,9 @@ export default function HeroAnnotations() {
             />
             <a
               className="callout-tag"
-              href="#menu"
+              href={`#${c.cover}`}
               style={{ top: `${c.y}%` }}
-              onClick={() => flash(c.no)}
+              onClick={() => flash(c.cover)}
             >
               <span className="callout-no">{c.no}</span>
               <span className="callout-sep" aria-hidden="true">

@@ -1,7 +1,7 @@
 import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
 import HeroAnnotations from "./hero-annotations";
-import MenuCatalogue from "./menu-catalogue";
+import SixCovers from "./six-covers";
 
 export default function Home() {
   return (
@@ -96,7 +96,7 @@ export default function Home() {
           MEDICALLY SUPERVISED · CERTIFIED PRACTITIONERS · CE-MARKED DEVICES
         </p>
 
-        <MenuCatalogue />
+        <SixCovers />
 
         <section className="visit" id="visit">
           <figure className="plate">
