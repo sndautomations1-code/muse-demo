@@ -1039,6 +1039,28 @@ body.over-hero .nav-cta:focus-visible {
   align-items: center;
 }
 
+/* Rose background — desktop only; static, no blend tricks */
+@media (min-width: 1024px) {
+  .visit {
+    position: relative;
+    background: url("/images/roses-bg.png") center / cover no-repeat;
+  }
+
+  /* Cream veil between artwork and content, so the image's white canvas
+     melts into the page instead of reading as a white box */
+  .visit::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(242, 241, 236, 0.55);
+  }
+
+  .visit > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
 .plate {
   position: relative;
   aspect-ratio: 4 / 5;
