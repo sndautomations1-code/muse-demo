@@ -1013,13 +1013,86 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— 4.5 The Visit ——— */
 
 .visit {
+  position: relative;
+  overflow: hidden; /* crops the thorn nest at the section edges */
   padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
-  max-width: 82rem;
+  --flora-height: 112%;
+  --flora-opacity: 1;
+  --flora-bottom-h: 120vw; /* horizontal extent of the rotated bottom band */
+  --flora-bottom-sink: 20vw; /* how deep its dense edge sits below the floor */
+}
+
+.visit-grid {
+  max-width: var(--maxw);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
+}
+
+/* Thorn nest — raw black-on-white asset; multiply knocks the white out
+   over paper, so no transparency processing. Desktop only. */
+.visit-flora {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  /* room for the bottom band clear of the Booking edge */
+  .visit {
+    padding-bottom: clamp(6rem, 14vh, 10rem);
+  }
+
+  .visit-flora {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: auto;
+    max-width: none; /* escape the global img { max-width: 100% } */
+    mix-blend-mode: multiply;
+    opacity: var(--flora-opacity);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .visit-flora-left,
+  .visit-flora-right {
+    top: 50%;
+    height: var(--flora-height);
+  }
+
+  .visit-flora-left {
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .visit-flora-right {
+    right: 0;
+    transform: translateY(-50%) scaleX(-1);
+  }
+
+  /* Rotated -90°: the asset's dense left edge becomes the bottom edge and
+     the tips point upward. Sunk below the section floor so the dense mass
+     stays under the text baseline and only thin tips rise into the column
+     gap; corner overlap with the side layers is the intended density. */
+  .visit-flora-bottom {
+    left: 50%;
+    bottom: calc(var(--flora-bottom-h) * -0.253 - var(--flora-bottom-sink));
+    height: var(--flora-bottom-h);
+    transform: translateX(-50%) rotate(-90deg);
+  }
+
+  /* Readability island — the only opaque layer besides the plate */
+  .visit-text {
+    position: relative;
+    z-index: 1;
+    background: var(--paper);
+    padding: 2rem;
+  }
+
+  .plate {
+    z-index: 1;
+  }
 }
 
 .plate {
@@ -1075,7 +1148,7 @@ body.over-hero .nav-cta:focus-visible {
 }
 
 @media (min-width: 900px) {
-  .visit {
+  .visit-grid {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 }
