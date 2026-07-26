@@ -125,7 +125,7 @@ export default function Home() {
                 sizes="(min-width: 900px) 45vw, 100vw"
               />
               <figcaption className="plate-caption mono">
-                PLATE II — TREATMENT ROOM
+                PLATE 07 — TREATMENT ROOM
               </figcaption>
             </figure>
             <div className="visit-text">
