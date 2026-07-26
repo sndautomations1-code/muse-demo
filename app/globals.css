@@ -1029,13 +1029,67 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— 4.5 The Visit ——— */
 
 .visit {
+  position: relative;
+  overflow: hidden; /* clips spines taller than the section */
   padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
+}
+
+.visit-inner {
   max-width: 82rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
+}
+
+/* Giant vertical spine-text watermarks on the flanks. Desktop only. */
+.visit-spine {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .visit-spine {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    font-family: var(--font-display), serif;
+    font-size: clamp(4.5rem, 7.5vw, 9.5rem);
+    line-height: 1; /* keep the spine band as slim as its glyphs */
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    color: var(--ink);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* reads bottom-to-top, like a real book spine */
+  .visit-spine-left {
+    left: 1.2vw;
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .visit-spine-right {
+    right: 1.2vw;
+    transform: translateY(-50%);
+  }
+
+  /* Readability island — opaque paper over the spine glyphs */
+  .visit-text {
+    position: relative;
+    z-index: 1;
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  /* Cell paper must paint above the spines, not under them */
+  .visit-steps {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .plate {
@@ -1090,7 +1144,7 @@ body.over-hero .nav-cta:focus-visible {
 }
 
 @media (min-width: 900px) {
-  .visit {
+  .visit-inner {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 }

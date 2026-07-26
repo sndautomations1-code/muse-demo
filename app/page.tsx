@@ -101,37 +101,45 @@ export default function Home() {
         <MenuSheet />
 
         <section className="visit" id="visit">
-          <figure className="plate">
-            <Image
-              src="/images/plate-2.jpg"
-              alt="Treatment room with black plaster walls"
-              fill
-              sizes="(min-width: 900px) 45vw, 100vw"
-            />
-            <figcaption className="plate-caption mono">
-              PLATE 07 — TREATMENT ROOM
-            </figcaption>
-          </figure>
-          <div className="visit-text">
-            <p className="eyebrow mono">The Visit</p>
-            <h2 className="visit-title">
-              A private visit, <em>edited</em> to you.
-            </h2>
-            <p className="visit-p">
-              {
-                "One client at a time. Your visit opens with a skin consultation and a full medical history, and closes with aftercare you can actually follow."
-              }
-            </p>
-            <p className="visit-p">
-              {
-                "Treatment rooms are private, devices are medical-grade, and nothing is recommended that your skin doesn't need."
-              }
-            </p>
-            <p className="visit-mono mono">
-              PRIVATE ROOMS · TWO PRACTITIONERS · MARYLEBONE, LONDON
-            </p>
+          <span className="visit-spine visit-spine-left" aria-hidden="true">
+            MUSE — THE AUTUMN EDIT
+          </span>
+          <span className="visit-spine visit-spine-right" aria-hidden="true">
+            ISSUE 01 — MMXXVI
+          </span>
+          <div className="visit-inner">
+            <figure className="plate">
+              <Image
+                src="/images/plate-2.jpg"
+                alt="Treatment room with black plaster walls"
+                fill
+                sizes="(min-width: 900px) 45vw, 100vw"
+              />
+              <figcaption className="plate-caption mono">
+                PLATE 07 — TREATMENT ROOM
+              </figcaption>
+            </figure>
+            <div className="visit-text">
+              <p className="eyebrow mono">The Visit</p>
+              <h2 className="visit-title">
+                A private visit, <em>edited</em> to you.
+              </h2>
+              <p className="visit-p">
+                {
+                  "One client at a time. Your visit opens with a skin consultation and a full medical history, and closes with aftercare you can actually follow."
+                }
+              </p>
+              <p className="visit-p">
+                {
+                  "Treatment rooms are private, devices are medical-grade, and nothing is recommended that your skin doesn't need."
+                }
+              </p>
+              <p className="visit-mono mono">
+                PRIVATE ROOMS · TWO PRACTITIONERS · MARYLEBONE, LONDON
+              </p>
+            </div>
+            <VisitSteps />
           </div>
-          <VisitSteps />
         </section>
 
         <section className="booking">
