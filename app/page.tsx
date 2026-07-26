@@ -3,6 +3,7 @@ import PlateImage from "./plate-image";
 import CoverObserver from "./cover-observer";
 import HeroAnnotations from "./hero-annotations";
 import MenuSheet from "./menu-sheet";
+import VisitSteps from "./visit-steps";
 
 export default function Home() {
   return (
@@ -130,6 +131,7 @@ export default function Home() {
               PRIVATE ROOMS · TWO PRACTITIONERS · MARYLEBONE, LONDON
             </p>
           </div>
+          <VisitSteps />
         </section>
 
         <section className="booking">

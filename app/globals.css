@@ -1095,6 +1095,90 @@ body.over-hero .nav-cta:focus-visible {
   }
 }
 
+/* ——— Visit protocol band — "How the visit unfolds" ——— */
+
+.visit-steps {
+  grid-column: 1 / -1;
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+.steps-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.68rem;
+  margin-bottom: 1.5rem;
+}
+
+.steps-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hair);
+}
+
+/* Same catalogue-sheet technique as the menu grid: 1px gaps over a
+   --hair backdrop draw shared hairline separators */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+}
+
+.step-cell {
+  background: var(--paper);
+  padding: 1.5rem;
+}
+
+.step-no {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--klein);
+}
+
+.step-title {
+  margin-top: 0.8rem;
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.step-body {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(22, 22, 26, 0.75);
+}
+
+@media (min-width: 560px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Entrance — armed from JS so a no-JS render arrives finished;
+   cells fade + rise, staggered by grid order via --step-delay */
+.steps-grid.is-armed .step-cell {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+  transition-delay: var(--step-delay, 0ms);
+}
+
+.steps-grid.is-armed .step-cell.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ——— 4.6 Booking ——— */
 
 .booking {
@@ -1232,7 +1316,8 @@ body.over-hero .nav-cta:focus-visible {
 
   /* The armed entrance state would otherwise stick with no transition
      left to release it */
-  .sheet-grid.is-armed .sheet-card {
+  .sheet-grid.is-armed .sheet-card,
+  .steps-grid.is-armed .step-cell {
     opacity: 1 !important;
     transform: none !important;
   }
