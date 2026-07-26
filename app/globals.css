@@ -1029,14 +1029,7 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— 4.5 The Visit ——— */
 
 .visit {
-  position: relative;
-  overflow: hidden; /* crops the corner garlands at the section edges */
   padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
-  padding-top: clamp(5rem, 10vh, 8rem); /* air for the corner arcs */
-  --flora-w: 30vw;
-}
-
-.visit-inner {
   max-width: 82rem;
   margin: 0 auto;
   display: grid;
@@ -1045,51 +1038,8 @@ body.over-hero .nav-cta:focus-visible {
   align-items: center;
 }
 
-/* Corner rose garlands — raw black-on-white asset; multiply knocks the
-   white out over paper, so no transparency processing. The asset tapers
-   off on its own before the bottom, so no mask. Desktop only. */
-.visit-flora {
-  display: none;
-}
-
-@media (min-width: 1280px) {
-  .visit-flora {
-    display: block;
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    width: var(--flora-w, 30vw);
-    height: auto;
-    max-width: 600px;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* -1.5vw hides the asset's thin white margin off the section edge —
-     the vines grow from off-screen */
-  .visit-flora-left {
-    left: -1.5vw;
-  }
-
-  .visit-flora-right {
-    right: -1.5vw;
-    transform: scaleX(-1);
-  }
-
-  /* Readability island — opaque paper over the garlands */
-  .visit-text {
-    position: relative;
-    z-index: 1;
-    background: var(--paper);
-    padding: 2rem;
-    max-width: 34rem;
-  }
-}
-
 .plate {
   position: relative;
-  z-index: 1; /* opaque island above the garlands */
   aspect-ratio: 4 / 5;
   background: var(--paper);
   overflow: hidden;
@@ -1140,7 +1090,7 @@ body.over-hero .nav-cta:focus-visible {
 }
 
 @media (min-width: 900px) {
-  .visit-inner {
+  .visit {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 }
