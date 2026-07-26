@@ -83,12 +83,13 @@ export default function Home() {
           </h1>
           <p className="hero-lede">
             {
-              "Advanced facials, injectables and laser therapy in a private Marylebone clinic. Every plan begins with a consultation — and is edited to your skin."
+              "Curated aesthetic medicine and advanced skin therapy in a discreet Marylebone clinic. Each plan is precision-edited to reveal your optimal complexion."
             }
           </p>
           <div className="cover-band mono">
             <span className="cover-band-left">
-              Issue 01<span className="cover-band-ext"> — The Autumn Edit</span>
+              The precision of art
+              <span className="cover-band-ext">, the science of skin.</span>
             </span>
             <span className="cover-band-right">Marylebone, London</span>
           </div>
