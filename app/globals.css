@@ -3,9 +3,6 @@
    ———————————————————————————————— */
 
 :root {
-  /* menu flora's rendered width measured at 1440 (810.8px) — shared by
-     the Visit columns so the garland reads continuous at identical size */
-  --flora-col-w: 56.31vw;
   --paper: #f2f1ec;
   --ink: #16161a;
   --klein: #002fa7;
@@ -718,6 +715,7 @@ body.over-hero .nav-cta:focus-visible {
   overflow: hidden; /* crops the rose flanks at the section edges */
   background: var(--paper);
   padding: clamp(4rem, 9vh, 7rem) var(--gutter);
+  --flora-height: 112%;
   --flora-opacity: 1;
 }
 
@@ -732,11 +730,9 @@ body.over-hero .nav-cta:focus-visible {
     display: block;
     position: absolute;
     z-index: 0;
-    top: 0;
-    height: 100%;
-    width: var(--flora-col-w);
-    object-fit: cover; /* width-driven scale; vertical excess crops */
-    object-position: center;
+    top: 50%;
+    height: var(--flora-height);
+    width: auto;
     max-width: none; /* escape the global img { max-width: 100% } */
     mix-blend-mode: multiply;
     opacity: var(--flora-opacity);
@@ -762,11 +758,12 @@ body.over-hero .nav-cta:focus-visible {
 
   .sheet-flora-left {
     left: 0;
+    transform: translateY(-50%);
   }
 
   .sheet-flora-right {
     right: 0;
-    transform: scaleX(-1);
+    transform: translateY(-50%) scaleX(-1);
   }
 }
 
@@ -1032,12 +1029,7 @@ body.over-hero .nav-cta:focus-visible {
 /* ——— 4.5 The Visit ——— */
 
 .visit {
-  position: relative;
-  overflow: hidden; /* crops the rose columns at the section edges */
   padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
-}
-
-.visit-inner {
   max-width: 82rem;
   margin: 0 auto;
   display: grid;
@@ -1046,68 +1038,8 @@ body.over-hero .nav-cta:focus-visible {
   align-items: center;
 }
 
-/* Continuation of the menu's rose columns — same asset at the same
-   rendered width (--flora-col-w), fading in at the top to hand off from
-   the menu's bottom fade, and fully dissolved before Booking. */
-.visit-flora {
-  display: none;
-}
-
-@media (min-width: 1280px) {
-  .visit-flora {
-    display: block;
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    height: 100%;
-    width: var(--flora-col-w);
-    object-fit: cover; /* width-driven scale; vertical excess crops */
-    object-position: top;
-    max-width: none; /* escape the global img { max-width: 100% } */
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    user-select: none;
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.5) 7%,
-      black 14%,
-      black 74%,
-      rgba(0, 0, 0, 0.4) 85%,
-      transparent 93%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.5) 7%,
-      black 14%,
-      black 74%,
-      rgba(0, 0, 0, 0.4) 85%,
-      transparent 93%
-    );
-  }
-
-  .visit-flora-left {
-    left: 0;
-  }
-
-  .visit-flora-right {
-    right: 0;
-    transform: scaleX(-1);
-  }
-
-  /* Readability island — opaque paper where the right column would
-     otherwise run under the text */
-  .visit-text {
-    background: var(--paper);
-    padding: 2rem;
-    max-width: 34rem;
-  }
-}
-
 .plate {
   position: relative;
-  z-index: 1; /* content above the rose columns */
   aspect-ratio: 4 / 5;
   background: var(--paper);
   overflow: hidden;
@@ -1131,11 +1063,6 @@ body.over-hero .nav-cta:focus-visible {
 
 .eyebrow {
   color: var(--klein);
-}
-
-.visit-text {
-  position: relative;
-  z-index: 1; /* content above the rose columns */
 }
 
 .visit-title {
@@ -1163,7 +1090,7 @@ body.over-hero .nav-cta:focus-visible {
 }
 
 @media (min-width: 900px) {
-  .visit-inner {
+  .visit {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 }

@@ -100,53 +100,35 @@ export default function Home() {
         <MenuSheet />
 
         <section className="visit" id="visit">
-          {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
-          <img
-            className="visit-flora visit-flora-left"
-            src="/plates/roses.png"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element -- raw asset: multiply blend does the knockout, no processing */}
-          <img
-            className="visit-flora visit-flora-right"
-            src="/plates/roses.png"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-          />
-          <div className="visit-inner">
-            <figure className="plate">
-              <Image
-                src="/images/plate-2.jpg"
-                alt="Treatment room with black plaster walls"
-                fill
-                sizes="(min-width: 900px) 45vw, 100vw"
-              />
-              <figcaption className="plate-caption mono">
-                PLATE 07 — TREATMENT ROOM
-              </figcaption>
-            </figure>
-            <div className="visit-text">
-              <p className="eyebrow mono">The Visit</p>
-              <h2 className="visit-title">
-                A private visit, <em>edited</em> to you.
-              </h2>
-              <p className="visit-p">
-                {
-                  "One client at a time. Your visit opens with a skin consultation and a full medical history, and closes with aftercare you can actually follow."
-                }
-              </p>
-              <p className="visit-p">
-                {
-                  "Treatment rooms are private, devices are medical-grade, and nothing is recommended that your skin doesn't need."
-                }
-              </p>
-              <p className="visit-mono mono">
-                PRIVATE ROOMS · TWO PRACTITIONERS · MARYLEBONE, LONDON
-              </p>
-            </div>
+          <figure className="plate">
+            <Image
+              src="/images/plate-2.jpg"
+              alt="Treatment room with black plaster walls"
+              fill
+              sizes="(min-width: 900px) 45vw, 100vw"
+            />
+            <figcaption className="plate-caption mono">
+              PLATE 07 — TREATMENT ROOM
+            </figcaption>
+          </figure>
+          <div className="visit-text">
+            <p className="eyebrow mono">The Visit</p>
+            <h2 className="visit-title">
+              A private visit, <em>edited</em> to you.
+            </h2>
+            <p className="visit-p">
+              {
+                "One client at a time. Your visit opens with a skin consultation and a full medical history, and closes with aftercare you can actually follow."
+              }
+            </p>
+            <p className="visit-p">
+              {
+                "Treatment rooms are private, devices are medical-grade, and nothing is recommended that your skin doesn't need."
+              }
+            </p>
+            <p className="visit-mono mono">
+              PRIVATE ROOMS · TWO PRACTITIONERS · MARYLEBONE, LONDON
+            </p>
           </div>
         </section>
 
